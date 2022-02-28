@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <ion-card>
+    <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [labels]="chartOptions.labels"
+        [responsive]="chartOptions.responsive"
+      ></apx-chart>
+    </div>
+  </ion-card>
+
+   <!-- REGISTROS -->
+   <ion-card>
+
+    <ion-item class='row_list'>
+      <div>Finança</div>
+      <div class="spacer"></div>
+      <div>Data</div>
+    </ion-item>
+
+    <ion-item class='row_list' *ngFor='let finance of allFinances.reverse() | slice:0:4; let i = index'>
+      {{ finance.category.length > 12 ? finance.category.slice(0,12) + ' ...' : finance.category }} &nbsp;
+      <div [class]='finance.value < 0 ? "red_text" : "green_text" '>
+         ( {{ finance.value > 0 ? "+" : "-" }}{{ finance.value }} )
+      </div>
+
+      <div class="spacer"></div>
+
+      <div>
+        {{ finance.dateCreation.split(' ')[0] }}
+      </div>
+
+    </ion-item>
+  </ion-card>
+
+</ion-content>
